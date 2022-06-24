@@ -9,30 +9,42 @@ public class BankOnline {
 
     private final String regex = "[0-9]+";
     private String cardNumber;
-    private double money;
+    private Double money;
     
     public BankOnline () {}
 
-    public BankOnline (String cardNumber, double money) throws BankOnlineException{
+    public BankOnline (String cardNumber, Double money) throws BankOnlineException{
         
         this.cardNumber = checkCardNumber(cardNumber);
         setMoney(money);
     }
 
-    public void send(String cardNumber, double money) throws BankOnlineException{
+    public void send(String cardNumber, Double money) throws BankOnlineException{
+            
+        try{
+            if (cardNumber == null){
+                throw new BankOnlineException("Field card number is incorrect: empty field");
+            }
+            if (money == null){
+                throw new BankOnlineException("Field money is incorrect: empty field");
+            }
+            if (money > 50_000){
+                throw new BankOnlineException("Exceeding the limit of 50,000");
+            }
+            if (money <= 0){
+                throw new BankOnlineException("Money is incorrect: negative value");
+            }
+            if ((this.money - money) < 0){
+                throw new BankOnlineException("Insufficient funds");
+            }
 
-        if (money > 50_000){
-            throw new BankOnlineException("Exceeding the limit of 50,000");
-        }
-        if (money <= 0){
-            throw new BankOnlineException("Money is incorrect");
-        }
-        if ((this.money - money) < 0){
-            throw new BankOnlineException("Insufficient funds");
-        }
+            checkCardNumber(cardNumber);
+            setMoney(this.money - money);
 
-        checkCardNumber(cardNumber);
-        setMoney(this.money - money);
+            System.out.println("Операция прошла успешно");
+            } catch (BankOnlineException exception) {
+                System.out.println(exception);
+            }
     }
 
     private String checkCardNumber(String cardNumber) throws BankOnlineException {
@@ -42,20 +54,19 @@ public class BankOnline {
         if (cardNumber.length() != 16){
             throw new BankOnlineException("Card number is incorrect: length 16");
         }
-        if (cardNumber.equals(null) || cardNumber.equals("")){
-            throw new BankOnlineException("Card number is incorrect: empty field");
-        }
         if (! cardNumber.matches(regex)){
             throw new BankOnlineException("Card number is incorrect: only numbers");
         }
         if (cardNumber.equals(this.cardNumber)){
-            throw new BankOnlineException("Card number is incorrect");
+            throw new BankOnlineException("Card number is incorrect: send to yourself");
         }
         if (CheckLockCardNumber(cardNumber)){
             throw new BankOnlineException("Card number is lock");
         }
 
         return cardNumber;
+
+        
     }
 
     private boolean CheckLockCardNumber(String cardNumber){
@@ -93,19 +104,24 @@ public class BankOnline {
         this.cardNumber = cardNumber;
     }
 
-    private void setMoney(double money) throws BankOnlineException {
-        if (money < 0){
-            throw new BankOnlineException("Money is incorrect");
+    private void setMoney(Double money) throws BankOnlineException {
+        
+        try{
+            if (money < 0){
+                throw new BankOnlineException("Money is incorrect: negative value");
+            }
+            this.money = money;
+        } catch(BankOnlineException exception){
+            System.out.println(exception);
         }
-    
-        this.money = money;
+
     }
 
     public String getCardNumber() {
         return cardNumber;
     }
 
-    public double getMoney() {
+    public Double getMoney() {
         return money;
     }
 
