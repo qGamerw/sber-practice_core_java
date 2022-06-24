@@ -1,7 +1,7 @@
 package Exceptions;
 
 public class BankOnlineCheck {
-    public static void main(String[] args) throws BankOnlineException {
+    public static void main(String[] args) {
         
         BankOnline bankOnline = new BankOnline("2222 2222 2222 2227", 1_000_000.00);
 

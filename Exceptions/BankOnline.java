@@ -65,7 +65,6 @@ public class BankOnline {
        } catch (ArgumentNullException eArgumentNullException){
             eArgumentNullException.printStackTrace();
         }
-        
         return cardNumber;
     }
 
