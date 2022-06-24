@@ -18,12 +18,14 @@ public class BankOnline {
         this.cardNumber = deleteSpaceCardNumber(cardNumber);
     }
 
-    public void send(String cardNumber, Double money) {
-        cardNumber = deleteSpaceCardNumber(cardNumber);
+    public void send(String cardNumber, Double money) throws BankOnlineException {
+        
         try{
             if (cardNumber == null){
                 throw new ArgumentNullException("Field card number is incorrect: empty field");
-            } else if (money == null){
+            } else {
+                cardNumber = deleteSpaceCardNumber(cardNumber);
+            } if (money == null){
                 throw new ArgumentNullException("Field money is incorrect: empty field");
             } else if (! cardNumber.matches(regex)){
                 throw new InvalidNumberCardException("Card number is incorrect: only numbers");
@@ -40,31 +42,13 @@ public class BankOnline {
             } else if (cardNumber.equals(this.cardNumber)){
                 throw new InvalidNumberCardException("Card number is incorrect: send to yourself");
             }
-
             System.out.println("Операция прошла успешно");
-
-            } catch (ArgumentNullException eArgumentNullException){
-                eArgumentNullException.printStackTrace();
-            } catch (InvalidNumberCardException eInvalidNumberCardException) {
-                eInvalidNumberCardException.printStackTrace();
-            } catch (NegativeTransferAmountException eNegativeTransferAmountException){
-                eNegativeTransferAmountException.printStackTrace();
-            } catch (OutOfLimitTransferException eLimitTransferException) {
-                eLimitTransferException.printStackTrace(); 
-            } catch (TransferBlockedCardException eTransferBlockedCardException){
-                eTransferBlockedCardException.printStackTrace();
-            } 
+        }
+        finally{}
     }
 
     private String deleteSpaceCardNumber(String cardNumber) {
-       try{
-        if (cardNumber == null){
-            throw new ArgumentNullException("Field card number is incorrect: empty field");
-        }
         cardNumber = cardNumber.replaceAll("\\s+","");
-       } catch (ArgumentNullException eArgumentNullException){
-            eArgumentNullException.printStackTrace();
-        }
         return cardNumber;
     }
 
