@@ -8,34 +8,35 @@ import java.io.IOException;
 
 public class FileDeleteSpace {
     
-    public static void deleteSpace(String filer, String filew){
+    public static void deleteSpace(String fileRead, String fileWrite){
         
-        BufferedReader br = null;
-        PrintWriter pw = null;
+        BufferedReader bufferedReader = null;
+        PrintWriter printWriter = null;
         
         try {
-            br = new BufferedReader(new FileReader(filer));
-            pw = new PrintWriter(filew);
+            bufferedReader = new BufferedReader(new FileReader(fileRead));
+            printWriter = new PrintWriter(fileWrite);
             String line;
             try {
-                while ((line = br.readLine()) != null){
+                while ((line = bufferedReader.readLine()) != null){
                     line = line.replaceAll("\\s+"," ");
                     line = line.replaceAll(" ,",", ");
                     line = line.replaceAll(" !","! ");
-                    pw.println(line);
+                    printWriter.println(line);
                 }
-            } catch (IOException exception) {
-                exception.printStackTrace();
+
+            } catch (IOException eIoException) {
+                eIoException.printStackTrace();
             }
-        } catch (FileNotFoundException exception1) {
-            exception1.printStackTrace();
+        } catch (FileNotFoundException eFileNotFoundException) {
+            eFileNotFoundException.printStackTrace();
         }
         finally{
             try {
-                br.close();
-                pw.close();
-            } catch (IOException exception2) {
-                exception2.printStackTrace();
+                bufferedReader.close();
+                printWriter.close();
+            } catch (IOException eIoException) {
+                eIoException.printStackTrace();
             }
         }
     }

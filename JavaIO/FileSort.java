@@ -8,49 +8,49 @@ import java.io.IOException;
 
 public class FileSort {
     
-    public static void SortNames(String filer, String filew){
+    public static void SortNames(String fileRead, String fileWrite){
         
-        BufferedReader br = null;
-        PrintWriter pw = null;
+        BufferedReader bufferedReader = null;
+        PrintWriter printWriter = null;
         
         try {
-            br = new BufferedReader(new FileReader(filer));
-            pw = new PrintWriter(filew);
+            bufferedReader = new BufferedReader(new FileReader(fileRead));
+            printWriter = new PrintWriter(fileWrite);
             String line;
             try {
-                while ((line = br.readLine()) != null){
+                while ((line = bufferedReader.readLine()) != null){
                     line = line.replaceAll(",","");
                     
-                    String[] names = line.split(" ");
-                    sortName(names);
+                    String[] namesArr = line.split(" ");
+                    sortName(namesArr);
                     
-                    for (String name : names) {
-                        pw.write(name + "\n");
+                    for (String name : namesArr) {
+                        printWriter.write(name + "\n");
                     }
                 }
-            } catch (IOException exception) {
-                exception.printStackTrace();
+            } catch (IOException eIoException) {
+                eIoException.printStackTrace();
             }
-        } catch (FileNotFoundException exception1) {
-            exception1.printStackTrace();
+        } catch (FileNotFoundException eFileNotFoundException) {
+            eFileNotFoundException.printStackTrace();
         }
         finally{
             try {
-                br.close();
-                pw.close();
-            } catch (IOException exception2) {
-                exception2.printStackTrace();
+                bufferedReader.close();
+                printWriter.close();
+            } catch (IOException eIoException) {
+                eIoException.printStackTrace();
             }
         }
     }
 
-    private static void sortName(String[] str){
-        for (int i = 0; i < str.length; i++) {
-            for (int j = i + 1; j < str.length; j++) {
-                if ((str[i].compareTo(str[j])) > 0){
-                    String buff = str[i];
-                    str[i] = str[j];
-                    str[j] = buff;
+    private static void sortName(String[] strArr){
+        for (int i = 0; i < strArr.length; i++) {
+            for (int j = i + 1; j < strArr.length; j++) {
+                if ((strArr[i].compareTo(strArr[j])) > 0){
+                    String buff = strArr[i];
+                    strArr[i] = strArr[j];
+                    strArr[j] = buff;
                 }
             }
         }
