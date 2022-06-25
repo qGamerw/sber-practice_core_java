@@ -13,7 +13,7 @@ public class FileDeleteSpace {
         BufferedReader bufferedReader = null;
         PrintWriter printWriter = null;
         
-        try {
+        try { 
             bufferedReader = new BufferedReader(new FileReader(fileRead));
             printWriter = new PrintWriter(fileWrite);
             String line;

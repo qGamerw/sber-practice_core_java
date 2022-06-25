@@ -4,18 +4,18 @@ import java.io.*;
 
 public class FileCheck {
     public static void main(String[] args) {
-        
+         
         String filer = "JavaIO/Borodino.txt";
         String filew = "JavaIO/BorodinoDeleteSpace.txt";
         FileDeleteSpace.deleteSpace(filer, filew);
 
         String file ="JavaIO/listNames.txt";
-        String fileSort = "JavaIO/SortNames.txt";
+        String fileSort = "JavaIO/sortNames.txt";
         FileSort.SortNames(file, fileSort);
 
-        try (FileOutputStream outputStream = new FileOutputStream("JavaIO/SaveHero.txt");
+        try (FileOutputStream outputStream = new FileOutputStream("JavaIO/saveHero.txt");
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-            FileInputStream fileInputStream = new FileInputStream("JavaIO/SaveHero.txt");
+            FileInputStream fileInputStream = new FileInputStream("JavaIO/saveHero.txt");
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
            
             Hero hero = new Hero("Jack");

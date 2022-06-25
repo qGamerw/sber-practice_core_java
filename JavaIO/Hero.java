@@ -10,7 +10,7 @@ public class Hero implements Serializable {
     private int damage;
     private int lvl;
     private int experience;
-
+ 
     public Hero (){}
     
     public Hero(String nameHero){

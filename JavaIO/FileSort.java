@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
 import java.io.IOException;
-
+ 
 public class FileSort {
     
     public static void SortNames(String fileRead, String fileWrite){
