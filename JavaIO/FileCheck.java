@@ -7,17 +7,19 @@ public class FileCheck {
          
         String filer = "JavaIO/Borodino.txt";
         String filew = "JavaIO/BorodinoDeleteSpace.txt";
-        FileDeleteSpace.deleteSpace(filer, filew);
-
+        
         String file ="JavaIO/listNames.txt";
         String fileSort = "JavaIO/sortNames.txt";
-        FileSort.SortNames(file, fileSort);
+        
 
         try (FileOutputStream outputStream = new FileOutputStream("JavaIO/saveHero.txt");
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
             FileInputStream fileInputStream = new FileInputStream("JavaIO/saveHero.txt");
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
            
+            FileDeleteSpace.deleteSpace(filer, filew);
+            FileSort.SortNames(file, fileSort);
+
             Hero hero = new Hero("Jack");
             Hero hero2 = new Hero();
             

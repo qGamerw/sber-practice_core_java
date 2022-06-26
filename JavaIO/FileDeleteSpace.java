@@ -8,14 +8,12 @@ import java.io.IOException;
 
 public class FileDeleteSpace {
     
-    public static void deleteSpace(String fileRead, String fileWrite){
+    public static void deleteSpace(String fileRead, String fileWrite) throws IOException{
         
-        BufferedReader bufferedReader = null;
-        PrintWriter printWriter = null;
-        
-        try { 
-            bufferedReader = new BufferedReader(new FileReader(fileRead));
-            printWriter = new PrintWriter(fileWrite);
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileRead));
+             PrintWriter printWriter = new PrintWriter(fileWrite);) { 
+
+            
             String line;
             try {
                 while ((line = bufferedReader.readLine()) != null){
@@ -30,14 +28,6 @@ public class FileDeleteSpace {
             }
         } catch (FileNotFoundException eFileNotFoundException) {
             eFileNotFoundException.printStackTrace();
-        }
-        finally{
-            try {
-                bufferedReader.close();
-                printWriter.close();
-            } catch (IOException eIoException) {
-                eIoException.printStackTrace();
-            }
         }
     }
 }
