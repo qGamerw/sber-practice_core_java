@@ -9,23 +9,23 @@ public class BankOnline {
 
     private final String regex = "[0-9]+";
     private String cardNumber;
-    private Double money;
+    private double money;
     
     public BankOnline () {}
 
-    public BankOnline (String cardNumber, Double money){
+    public BankOnline (String cardNumber, double money){
         this.money = money;
         this.cardNumber = deleteSpaceCardNumber(cardNumber);
     }
 
-    public void send(String cardNumber, Double money) throws BankOnlineException {
+    public void send(String cardNumber, double money) throws BankOnlineException {
         
         try{
             if (cardNumber == null){
                 throw new ArgumentNullException("Field card number is incorrect: empty field");
             } else {
                 cardNumber = deleteSpaceCardNumber(cardNumber);
-            } if (money == null){
+            } if (money == 0){ // 0 <-null
                 throw new ArgumentNullException("Field money is incorrect: empty field");
             } else if (! cardNumber.matches(regex)){
                 throw new InvalidNumberCardException("Card number is incorrect: only numbers");
